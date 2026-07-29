@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Paciente - 15 Especialidades Médicas (Doctoralia)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* CSS: Estilo Global e Identidade Doctoralia */
+        :root {
+            --primary-teal: #00C2A0;
+            --primary-teal-dark: #009E82;
+            --secondary-navy: #1E293B;
+            --accent-blue: #0284C7;
+            --bg-slate: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --border-color: #E2E8F0;
+            --text-main: #334155;
+            --text-muted: #64748B;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #CBD5E1;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            color: var(--text-main);
+        }
+
+        /* Contentor dos Slides */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            padding: 40px 50px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Decoração Visual de Fundo */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--primary-teal) 0%, transparent 70%);
+            opacity: 0.08;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Cabeçalho do Slide */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--bg-slate);
+            padding-bottom: 16px;
+        }
+
+        .slide-title-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slide-icon-badge {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 194, 160, 0.1);
+            color: var(--primary-teal);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        h2.slide-title {
+            font-family: 'Roboto', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--secondary-navy);
+            margin: 0;
+        }
+
+        .brand-tag {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: var(--primary-teal);
+            font-size: 18px;
+        }
+
+        /* Slide de Capa */
+        .cover-content {
+            margin: auto;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .cover-content h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 58px;
+            color: var(--secondary-navy);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .cover-content h1 span {
+            color: var(--primary-teal);
+        }
+
+        .cover-subtitle {
+            font-size: 22px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
+
+        .cover-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .badge {
+            background-color: var(--bg-slate);
+            color: var(--secondary-navy);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Slide Coringa (Índice de Navegação) */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .index-card {
+            background-color: var(--bg-slate);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 18px 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--secondary-navy);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .index-card i {
+            font-size: 26px;
+            color: var(--primary-teal);
+            transition: transform 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .index-card span {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .index-card:hover {
+            background-color: var(--primary-teal);
+            color: white;
+            border-color: var(--primary-teal);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 194, 160, 0.25);
+        }
+
+        .index-card:hover i {
+            color: white;
+            transform: scale(1.15);
+        }
+
+        /* Grelha do Slide de Especialidade */
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            height: calc(100% - 90px);
+        }
+
+        /* Coluna da Esquerda: Matriz de Jornada */
+        .journey-matrix {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modalities-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .modality-card {
+            background-color: var(--bg-slate);
+            border-radius: 10px;
+            padding: 12px 14px;
+            border-top: 4px solid var(--primary-teal);
+            font-size: 13px;
+        }
+
+        .modality-card.convenio { border-top-color: var(--accent-blue); }
+        .modality-card.cirurgico { border-top-color: var(--secondary-navy); }
+
+        .modality-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--secondary-navy);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modality-desc {
+            color: var(--text-main);
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        /* Passos da Jornada (6 Etapas) */
+        .steps-container {
+            background-color: var(--bg-slate);
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            flex-grow: 1;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--secondary-navy);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .six-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .step-item {
+            background-color: white;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-teal);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .step-number {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .step-name {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--secondary-navy);
+            margin-bottom: 4px;
+        }
+
+        .step-detail {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Coluna da Direita: Sidebar com KPIs e Suporte */
+        .sidebar-card {
+            background-color: var(--bg-slate);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-box-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-box-content {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--secondary-navy);
+            line-height: 1.3;
+        }
+
+        .kpi-badge {
+            background-color: rgba(0, 194, 160, 0.15);
+            color: var(--primary-teal-dark);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* Botão Voltar ao Índice */
+        .btn-back-index {
+            margin-top: auto;
+            text-decoration: none;
+            background-color: var(--secondary-navy);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-back-index:hover {
+            background-color: var(--primary-teal);
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: CAPA -->
+<div class="slide-container" id="slide_capa">
+    <div class="brand-tag" style="position: absolute; top: 40px; right: 50px;">
+        <i class="fa-solid fa-notes-medical"></i> Doctoralia
+    </div>
+    <div class="cover-content">
+        <div style="font-size: 64px; color: var(--primary-teal); margin-bottom: 16px;">
+            <i class="fa-solid fa-hospital-user"></i>
+        </div>
+        <h1>Mapeamento da <span>Jornada do Paciente</span></h1>
+        <p class="cover-subtitle">Guia Estratégico para as 15 Principais Especialidades Médicas</p>
+        <div class="cover-badges">
+            <span class="badge"><i class="fa-solid fa-user"></i> Particular</span>
+            <span class="badge"><i class="fa-solid fa-id-card"></i> Convênio</span>
+            <span class="badge"><i class="fa-solid fa-scalpel"></i> Cirúrgico</span>
+        </div>
+        <div style="margin-top: 40px;">
+            <a href="#slide_coringa" class="btn-back-index" style="display: inline-flex; padding: 14px 28px; font-size: 16px; border-radius: 30px; background-color: var(--primary-teal);">
+                Iniciar Navegação por Especialidade <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 2: CORINGA (ÍNDICE DE INTERAÇÃO COM HIPERLIGAÇÕES) -->
+<div class="slide-container" id="slide_coringa">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-compass"></i></div>
+            <h2 class="slide-title">Índice Interativo de Especialidades</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="index-grid">
+        <a href="#slide_cardio" class="index-card"><i class="fa-solid fa-heart-pulse"></i><span>1. Cardiologia</span></a>
+        <a href="#slide_orto" class="index-card"><i class="fa-solid fa-bone"></i><span>2. Ortopedia</span></a>
+        <a href="#slide_gino" class="index-card"><i class="fa-solid fa-person-breastfeeding"></i><span>3. Ginecologia</span></a>
+        <a href="#slide_dermato" class="index-card"><i class="fa-solid fa-hand-dots"></i><span>4. Dermatologia</span></a>
+        <a href="#slide_oftalmo" class="index-card"><i class="fa-solid fa-eye"></i><span>5. Oftalmologia</span></a>
+        <a href="#slide_otorrino" class="index-card"><i class="fa-solid fa-ear-listen"></i><span>6. Otorrinolaringologia</span></a>
+        <a href="#slide_pediatria" class="index-card"><i class="fa-solid fa-child"></i><span>7. Pediatria</span></a>
+        <a href="#slide_neuro" class="index-card"><i class="fa-solid fa-brain"></i><span>8. Neurologia</span></a>
+        <a href="#slide_gastro" class="index-card"><i><svg style="width:1em; height:1em; fill:currentColor; vertical-align: -0.1em;" viewBox="0 0 24 24"><path d="M12.5 2c-.83 0-1.5.67-1.5 1.5v3.18c-2.31.42-4.27 1.87-5.26 3.82C4.68 12.6 5.48 15.35 7 17.5c1.37 1.94 3.32 3.5 5.5 3.5h1c4.42 0 8-3.58 8-8v-1.5c0-2.76-2.24-5-5-5h-1c-.55 0-1-.45-1-1V3.5c0-.83-.67-1.5-1.5-1.5z"/></svg></i><span>9. Gastroenterologia</span></a>
+        <a href="#slide_uro" class="index-card"><i class="fa-solid fa-venus-mars"></i><span>10. Urologia</span></a>
+        <a href="#slide_onco" class="index-card"><i class="fa-solid fa-ribbon"></i><span>11. Oncologia</span></a>
+        <a href="#slide_plastica" class="index-card"><i class="fa-solid fa-wand-magic-sparkles"></i><span>12. Cirurgia Plástica</span></a>
+        <a href="#slide_endo" class="index-card"><i class="fa-solid fa-droplet"></i><span>13. Endocrinologia</span></a>
+        <a href="#slide_psic" class="index-card"><i class="fa-solid fa-headset"></i><span>14. Psiquiatria</span></a>
+        <a href="#slide_pneu" class="index-card"><i class="fa-solid fa-lungs"></i><span>15. Pneumologia</span></a>
+    </div>
+</div>
+
+<!-- SLIDE 3: CARDIOLOGIA -->
+<div class="slide-container" id="slide_cardio">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h2 class="slide-title">1. Cardiologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Check-up integrado num só dia (consulta + ECG + Eco + Ergometria). Elevada exigência de pontualidade.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Consulta e agendamento contínuo de exames com pré-autorização de procedimentos junto do plano.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Cateterismo, angioplastia e marcapasso. Gestão rigorosa de risco cirúrgico e vaga de UCI.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento VIP ou via WhatsApp com indicação de preparo de exames.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Aferição imediata de sinais vitais e triagem de sintomas de alerta.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Anamnese detalhada e realização de exames gráficos em consultório.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Emissão e aprovação de guias para exames complexos ou cateterismo.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Intervenção hemodinâmica/cirúrgica e suporte ao acompanhante.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento de recuperação, lembretes de medicação e NPS.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Acompanhamento contínuo e resolução num só local (One-stop-shop).</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Demora na aprovação de exames diagnósticos complementares pelo convênio.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Tempo Total de Permanência</div>
+                <div class="kpi-badge">Taxa de Conversão Consulta Exame</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: ORTOPEDIA -->
+<div class="slide-container" id="slide_orto">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-bone"></i></div>
+            <h2 class="slide-title">2. Ortopedia e Traumatologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Medicina Desportiva e Gestão da Dor. Avaliação com infiltração ou terapias regenerativas no local.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Procura de laudos rápidos de RX/Ressonância e encaminhamento célere para fisioterapia.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Artroplastias e artroscopias. Cotação e aprovação de próteses/OPME de alto custo.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento por subespecialidade (joelho, ombro, coluna).</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Acomodação adaptada para mobilidade reduzida e dor aguda.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Exame físico, manobras ortopédicas e pedido de imagem.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Submissão de relatório para aprovação de OPME e fisioterapia.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia reconstrutiva/prótese e protocolo de mobilização precoce.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Reabilitação guiada, controlo de cargas e regresso ao desporto/rotina.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Alívio rápido da dor e recuperação funcional de mobilidade.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Demora na libertação de materiais de prótese (OPME) pelos seguros.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Prazo de Autorização OPME</div>
+                <div class="kpi-badge">Taxa de Retorno a Consultas</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: GINECOLOGIA E OBSTETRÍCIA -->
+<div class="slide-container" id="slide_gino">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-person-breastfeeding"></i></div>
+            <h2 class="slide-title">3. Ginecologia e Obstetrícia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Acompanhamento pré-natal personalizado, plano de parto e contacto direto via WhatsApp.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Rotina preventiva anual (Papanicolau/Ecografia) e acompanhamento de exames.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Parto (Cesariana/Normal), Histerectomia e Cirurgia de Endometriose.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento facilitado e lembretes de rotina anual.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Ambiente acolhedor, privado e com espaço confortável.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Anamnese, recolha de rastreios e ecografia em consultório.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Reserva de maternidade/bloco e aprovação de equipa cirúrgica.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Assistência ao parto/cirurgia com acompanhamento humanizado.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Revisão do puerpério, incentivo à amamentação e apoio pós-op.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Relação de confiança contínua e humanização do atendimento.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Disponibilidade da médica fora do horário durante o período do parto.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Retenção no Pacote Pré-Natal</div>
+                <div class="kpi-badge">Taxa de Reagendamento Anual</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: DERMATOLOGIA -->
+<div class="slide-container" id="slide_dermato">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-hand-dots"></i></div>
+            <h2 class="slide-title">4. Dermatologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Procedimentos estéticos (Toxina Botulínica, Preenchedores, Lasers). Foco em valor acrescentado.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Tratamento de Acne, Psoríase, Rosácea e Mapeamento Corporal de Sinais.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Excisão de lesões suspeitas, Cirurgia de Mohs e biópsias cutâneas.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Captação via redes sociais/site com catálogo de procedimentos.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Recepção de elevado padrão, café especial e questionário estético.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Dermatoscopia, avaliação facial e plano personalizado.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Orçamento claro de injetáveis ou aprovação de biópsias.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Aplicação de protocolo estético/cirúrgico sob anestesia local.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento do retoque e envio do laudo histopatológico.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Estética de alto padrão e prevenção de cancros de pele.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Conversão de consultas clínicas de convênio para procedimentos estéticos.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Conversão em Procedimentos</div>
+                <div class="kpi-badge">Tempo de Laudo Anatomo-Patológico</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: OFTALMOLOGIA -->
+<div class="slide-container" id="slide_oftalmo">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-eye"></i></div>
+            <h2 class="slide-title">5. Oftalmologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Cirurgia Refrativa a Laser e Lentes Intraoculares Premium com tecnologia avançada.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Consulta de Refração (prescrição de óculos), Mapeamento de Retina e Tonometria.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Cirurgia de Catarata (Facectomia), Pterígio e Glaucoma.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Primeiro contato com Oftalmologista, troca de especialista ou indicação.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Pré-consulta de auto-refração realizada por tecnólogos.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Lâmpada de fenda, refração e biometria ocular.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Aprovação de exames diagnósticos e lentes de catarata.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia ambulatorial sob anestesia tópica e sedação leve.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Entrega de tabela rígida de colírios e revisão no dia seguinte.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Volume eficiente de exames com precisão cirúrgica.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Tempo excessivo de espera na transição entre exames prévios e a consulta médica.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Conversão Exame-Cirurgia</div>
+                <div class="kpi-badge">Tempo Total de Atendimento</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: OTORRINOLARINGOLOGIA -->
+<div class="slide-container" id="slide_otorrino">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-ear-listen"></i></div>
+            <h2 class="slide-title">6. Otorrinolaringologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Rinoplastia Estética/Estruturada e tratamentos avançados para ressonar e apneia.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Sinusite, Otite, Lavagem Otológica e Videonasofibroscopia diagnóstica.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Septoplastia, Amigdalectomia, Timpanoplastia e Sinusectomia.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento rápido para quadros de dor de ouvidos ou tonturas.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Preparo de exames endoscópicos e anestesia tópica nasal.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Videonasofibroscopia com exibição de imagens em monitor.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Submissão de relatório para cirurgias funcionais nasais.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia endonasal sem recurso a tampão pós-operatório.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Orientação sobre lavagens nasais e lavagem cirúrgica de revisão.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Resolução rápida de dores e melhoria da qualidade respiratória.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Receio dos pacientes em relação à dor pós-operatória e tamponamento nasal.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Conversão Cirúrgica</div>
+                <div class="kpi-badge">Exames por Consulta</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 9: PEDIATRIA -->
+<div class="slide-container" id="slide_pediatria">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-child"></i></div>
+            <h2 class="slide-title">7. Pediatria</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Puericultura alargada, plano de acompanhamento no 1º ano e WhatsApp 24/7.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Consultas de rotina, vacinação e atendimento de doenças sazonais.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Postectomia (fimose), Hérnias (inguinal/umbilical) e Adenoamigdalectomia.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento flexível e com canal direto de apoio aos pais.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Espaço infantil lúdico, higienizado e acolhedor.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Avaliação do crescimento, desenvolvimento e orientação aos pais.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Aprovação célere para cirurgias infantis eletivas.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia com ambiente humanizado e presença dos pais até à sedação.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Seguimento ativo pós-consulta para verificar evolução da medicação.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Empatia, segurança e conquista da confiança dos pais.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Elevada ansiedade dos pais quanto à anestesia geral na criança.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">LTV nos Primeiros 2 Anos</div>
+                <div class="kpi-badge">Pontualidade de Atendimento</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: NEUROLOGIA -->
+<div class="slide-container" id="slide_neuro">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-brain"></i></div>
+            <h2 class="slide-title">8. Neurologia e Neurocirurgia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Segunda opinião médica detalhada, avaliação cognitiva e de memória.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Tratamento de Enxaqueca, Epilepsia, Doença de Parkinson e renoação de medicação.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Hérnia de Disco (Coluna), Aneurismas e Tumores Cerebrais.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento com tempo alargado para análise de exames prévios.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Acolhimento sereno para pacientes com perturbações motoras/cognitivas.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Exame neurológico minucioso e teste de reflexos/cognição.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Pedidos urgentes de Ressonância Magnética ou PET-CT.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Neurocirurgia com monitorização intraoperatória contínua.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Seguimento pós-UCI, reabilitação neuropsicológica e apoio familiar.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Rigor diagnóstico em patologias de elevada complexidade.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Medo grave do paciente относительно sequelas neurológicas.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Tempo de Internamento Pós-Op</div>
+                <div class="kpi-badge">Adesão ao Tratamento Crónico</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: GASTROENTEROLOGIA -->
+<div class="slide-container" id="slide_gastro">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i><svg style="width:1em; height:1em; fill:currentColor; vertical-align: -0.1em;" viewBox="0 0 24 24"><path d="M12.5 2c-.83 0-1.5.67-1.5 1.5v3.18c-2.31.42-4.27 1.87-5.26 3.82C4.68 12.6 5.48 15.35 7 17.5c1.37 1.94 3.32 3.5 5.5 3.5h1c4.42 0 8-3.58 8-8v-1.5c0-2.76-2.24-5-5-5h-1c-.55 0-1-.45-1-1V3.5c0-.83-.67-1.5-1.5-1.5z"/></svg></i></div>
+            <h2 class="slide-title">9. Gastroenterologia e Cirurgia Digestiva</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Check-up digestivo premium, Colocação de Balão Intragástrico e Testes de Intolerância.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Gastrite, Refluxo, Agendamento de Endoscopia Digestiva e Colonoscopia.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Colecistectomia (vesícula), Cirurgia Bariátrica e Hérnias Abdominais.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Envio claro de instruções de jejum e preparação intestinal.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Admissão em área de exames com sedação anestésica.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Avaliação clínica e discussão dos achados da endoscopia.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Aprovação de exames endoscópicos e laudos multidisciplinares.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia por videolaparoscopia com menor tempo de internamento.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento nutricional pós-bariátrico e reintrodução alimentar.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Sincronização perfeita entre exames endoscópicos e cirurgias.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Falta de adesão do paciente à preparação prévia do exame de colonoscopia.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Ocupação Agenda Endoscopia</div>
+                <div class="kpi-badge">Tempo de Liberação Laudo Bariátrica</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: UROLOGIA -->
+<div class="slide-container" id="slide_uro">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-venus-mars"></i></div>
+            <h2 class="slide-title">10. Urologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Saúde do Homem, Disfunção Erétil e Terapias de Onda de Choque em ambiente discreto.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Rastreio de Cancro da Próstata (PSA/Toque), Infecções Urinárias e Pedras nos Rins.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Prostatectomia Robótica, Litotripsia a Laser para cálculos e Vasectomia.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento discreto e lembretes de exames de sangue (PSA).</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Atendimento em área reservada para garantia de privacidade.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Exame físico, avaliação prostática ou ecografia urinária.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Aprovação cirúrgica de tecnologia robótica ou laser.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia minimamente invasiva e colocação de Stent/Cateter.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento pós-algaliação e fisioterapia pélvica.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Prevenção da saúde masculina e tratamentos minimamente invasivos.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Resistência/Preconceito cultural dos homens relativamente ao rastreio prostático.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Retenção de Pacientes >45 anos</div>
+                <div class="kpi-badge">Satisfação Pós-Op 90 dias</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: ONCOLOGIA -->
+<div class="slide-container" id="slide_onco">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-ribbon"></i></div>
+            <h2 class="slide-title">11. Oncologia e Cirurgia Oncológica</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Segunda opinião urgente, Testes Genéticos de Precisão e Imunoterapia avançada.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Protocolos de Quimioterapia, Radioterapia e aprovação de antineoplásicos.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Mastectomia, Colectomia e Tumorectomias com margem de segurança.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento prioritário com navegador dedicado em 24-48h.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Atendimento por equipa multidisciplinar (médico, psico, enfermagem).</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Apresentação do plano terapêutico discutido em Tumor Board.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Gestão rigorosa e célere de guias de medicação de alto custo.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Ressecção tumoral ou infusão de quimioterapia na central.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Seguimento de efeitos colaterais e vigilância de remissão por 5 anos.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Rapidez do diagnóstico ao tratamento (Time-to-treatment) e suporte.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Burocracia e atrasos no processo de autorização de fármacos pelo seguro.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Time-to-Treatment (Dias)</div>
+                <div class="kpi-badge">Taxa de Margem Cirúrgica Livre</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 14: CIRURGIA PLÁSTICA -->
+<div class="slide-container" id="slide_plastica">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <h2 class="slide-title">12. Cirurgia Plástica</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Mamoplastia, Lipoaspiração, Abdominoplastia e Blefaroplastia (Jornada de Desejo).</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Cirurgia Reparadora (Pós-Bariátrica, Reconstrução Mamária pós-cancro).</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Procedimentos de bloco operatório com internamento de curto prazo e drenagem.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Atendimento comercial/concierge com resposta rápida e personalizada.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Ambiente exclusivo, café gourmet e consultoria visual.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Análise de expetativas, fotografias pré-op e escolha de próteses.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Orçamento em pacote (hospital, anestesia) ou relatório para o plano.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Cirurgia estética e acompanhamento rigoroso na recuperação anestésica.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Drenagens linfáticas, acompanhamento de cicatrizes e protocolo de fotos pós.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Experiência do paciente, segurança e superação de expetativas.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Adesão do paciente às recomendações e malhas compressivas no pós-op.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Conversão Orçamento em Cirurgia</div>
+                <div class="kpi-badge">Índice de Complicações / Seroma</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 15: ENDOCRINOLOGIA -->
+<div class="slide-container" id="slide_endo">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-droplet"></i></div>
+            <h2 class="slide-title">13. Endocrinologia e Metabologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Programas de Emagrecimento, Bioimpedância de precisão e modulação hormonal.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Acompanhamento de Diabetes Mellitus, Hipotireoidismo e Dislipidemia.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Cirúrgico</div>
+                    <div class="modality-desc">Tiroidectomia (nódulos/cancro de tiroide) e patologias da suprarrenal.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Lembrete de jejum para análise prévia de sangue se aplicável.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Exame de bioimpedância e medição corporal na recepção.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Avaliação metabólica, diário alimentar e plano individual.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Requisição de exames específicos (TSH, Hemoglobina Glicada).</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Acompanhamento pré e pós-cirúrgico de remoção glandular.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Reavaliação quadrimestral e monitorização via aplicação de saúde.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Mudança de estilo de vida e adesão ao tratamento crónico.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Desistência do paciente entre as consultas de acompanhamento a médio prazo.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Adesão ao Plano de Acompanhamento</div>
+                <div class="kpi-badge">Taxa de Comparência nos Retornos</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 16: PSIQUIATRIA -->
+<div class="slide-container" id="slide_psic">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-headset"></i></div>
+            <h2 class="slide-title">14. Psiquiatria</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Consultas alargadas (60 min), Telemedicina rápida e envio de receita digital.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Acompanhamento de Ansiedade, Depressão, PHDA e renovação de medicação.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Procedimentos</div>
+                    <div class="modality-desc">Eletroconvulsivoterapia (ECT), Estimulação Magnética e Internamento.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Agendamento confidencial com flexibilidade de teleconsulta.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Sala de espera silenciosa, discreta e acolhedora.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Escuta ativa, diagnóstico psiquiátrico e plano terapêutico.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Emissão de medicação controlada ou parecer de internamento.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Sessões de neuromodulação ou intervenção em momentos de crise.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento de adaptação aos psicofármacos e suporte.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Acolhimento sem julgamentos e continuidade terapêutica.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Stigma do paciente e interrupção precoce de medicação por efeitos colaterais.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Taxa de Renovação de Acompanhamento</div>
+                <div class="kpi-badge">Índice de Faltas (No-Show)</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 17: PNEUMOLOGIA -->
+<div class="slide-container" id="slide_pneu">
+    <div class="slide-header">
+        <div class="slide-title-group">
+            <div class="slide-icon-badge"><i class="fa-solid fa-lungs"></i></div>
+            <h2 class="slide-title">15. Pneumologia</h2>
+        </div>
+        <div class="brand-tag"><i class="fa-solid fa-notes-medical"></i> Doctoralia</div>
+    </div>
+    <div class="specialty-grid">
+        <div class="journey-matrix">
+            <div class="modalities-cards">
+                <div class="modality-card">
+                    <div class="modality-title"><i class="fa-solid fa-user"></i> Particular</div>
+                    <div class="modality-desc">Estudo de Apneia do Sono, Polissonografia Domiciliária e Check-up Pulmonar.</div>
+                </div>
+                <div class="modality-card convenio">
+                    <div class="modality-title"><i class="fa-solid fa-id-card"></i> Convênio</div>
+                    <div class="modality-desc">Tratamento de Asma, DPOC, Sequelas Respiratórias e Espirometria.</div>
+                </div>
+                <div class="modality-card cirurgico">
+                    <div class="modality-title"><i class="fa-solid fa-scalpel"></i> Intervenção</div>
+                    <div class="modality-desc">Broncoscopia com biópsia, Biópsia Pulmonar e Toracocentese.</div>
+                </div>
+            </div>
+            <div class="steps-container">
+                <div class="section-subtitle">Etapas da Jornada do Paciente</div>
+                <div class="six-steps-grid">
+                    <div class="step-item"><div class="step-number">Etapa 1</div><div class="step-name">Agendamento</div><div class="step-detail">Orientações para interrupção prévia de broncodilatadores.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 2</div><div class="step-name">Acolhimento</div><div class="step-detail">Oximetria de pulso e medição do fluxo expiratório.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 3</div><div class="step-name">Consulta</div><div class="step-detail">Auscultação pulmonar e realização do teste de espirometria.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 4</div><div class="step-name">Autorização</div><div class="step-detail">Guias para TAC de Tórax de alta resolução e exames do sono.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 5</div><div class="step-name">Procedimento</div><div class="step-detail">Broncoscopia sedada e titulação de equipamento CPAP.</div></div>
+                    <div class="step-item"><div class="step-number">Etapa 6</div><div class="step-name">Pós-Atendimento</div><div class="step-detail">Acompanhamento do uso de inaladores/CPAP e reabilitação.</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-card">
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-bullseye"></i> Foco Principal</div>
+                <div class="info-box-content">Controlo de patologias respiratórias crónicas e qualidade do sono.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-triangle-exclamation"></i> Gargalo Crítico</div>
+                <div class="info-box-content">Dificuldade de adaptação do paciente ao uso contínuo de CPAP/Inaladores.</div>
+            </div>
+            <div class="info-box">
+                <div class="info-box-title"><i class="fa-solid fa-chart-line"></i> KPIs Principais</div>
+                <div class="kpi-badge">Taxa de Adesão ao CPAP</div>
+                <div class="kpi-badge">Realização de Espirometria</div>
+            </div>
+            <a href="#slide_coringa" class="btn-back-index"><i class="fa-solid fa-th-large"></i> Voltar ao Índice</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
